@@ -96,13 +96,12 @@ package ddc {
       val naipes = List("O","P","C","E")
       val numerodedia = CorrigeDiaFrode( DiaDoAno(dia,mes,ano) , ano )
 
-      val s_dia = if(numerodedia < 365) cartas(CartaDiaFrode(numerodedia)) + naipes(NaipeDiaFrode(numerodedia))
+      val sDia = if(numerodedia < 365) cartas(CartaDiaFrode(numerodedia)) + naipes(NaipeDiaFrode(numerodedia))
       else  cartas(13)
-      val s_semana = cartas(CartaSemanaFrode(numerodedia)) + naipes(NaipeSemanaFrode(numerodedia))
-      val s_mes = cartas(Mes(numerodedia)) + naipes(EstacoesFrode(dia, ano))
-      val s_ano = cartas(CartaAnoFrode(ano)) + naipes(NaipeAnoFrode(ano))
-      val s_frode = s_dia + s_semana + s_mes + s_ano
-      return s_frode //formato de retorno dia semana mes ano sempre numero/naipe
+      val sSemana = cartas(CartaSemanaFrode(numerodedia)) + naipes(NaipeSemanaFrode(numerodedia))
+      val sMes = cartas(Mes(numerodedia)) + naipes(EstacoesFrode(dia, ano))
+      val sAno = cartas(CartaAnoFrode(ano)) + naipes(NaipeAnoFrode(ano))
+      sDia + sSemana + sMes + sAno
     }
 
     def ImprimeCalendarioFrode(dia: Int, mes: Int, ano: Int) { //RECEBE DATA ORIGINAL

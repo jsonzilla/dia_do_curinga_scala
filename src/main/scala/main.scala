@@ -2,9 +2,6 @@
 import ddc.calendar.{FrodeSimples, ImprimeCalendarioFrode}
 
 object Main extends App {
-  var dia, mes, ano: Int = 0
-  var numerodedia: Int = 0
-  var tmp_dia, tmp_mes, tmp_ano: Int = 0
   println("Entre com dia mes e ano (separados por enter) e precione ctrl-c")
   println("\n\tEntre com dia mes e ano (separados por espaco):")
 
@@ -13,7 +10,7 @@ object Main extends App {
 
   if (lines.length.==(3)) {
     ImprimeCalendarioFrode(augmentString(lines.apply(0)).toInt, augmentString(lines.apply(1)).toInt, augmentString(lines.apply(2)).toInt);
-    println("\n\tSimples -- ".+(FrodeSimples(Main.dia, Main.mes, Main.ano)));
+    println("\n\tSimples -- ".+(FrodeSimples(augmentString(lines.apply(0)).toInt, augmentString(lines.apply(1)).toInt, augmentString(lines.apply(2)).toInt)));
   }
   else {
     println("\nDigitou errado");
