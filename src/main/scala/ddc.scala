@@ -4,14 +4,14 @@ package ddc {
       (!(ano % 4 == 0) & !(ano % 100 == 0)) & (!(ano % 400 == 0))
     }
 
-    def CorrigeDiaFrode(dia: Int, ano: Int) : Int = {
+    def CorrigeDiaFrode(dia: Int) : Int = {
       if (dia > 60)  dia - 60
       else dia + 305
     }
 
     def CorrigeDiaFrodeVerificaBissexto(dia: Int, ano: Int): Int = {
-      if (EhAnoBissexto(ano - 1)) CorrigeDiaFrode(dia, ano) + 1
-      CorrigeDiaFrode(dia, ano)
+      if (EhAnoBissexto(ano - 1)) CorrigeDiaFrode(dia) + 1
+      CorrigeDiaFrode(dia)
     }
 
     def CorrigeAnoFrode(ano: Int) : Int = {
