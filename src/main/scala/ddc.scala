@@ -66,7 +66,8 @@ package ddc {
         ((ano < 1790)||(ano > 9999)) |
         (((mes == 1)||(mes == 3)||(mes == 5)||(mes == 7)||(mes == 8)||(mes == 10 )||(mes == 12)) & (dia > 31)) |
         (((mes == 4)||(mes == 6)||(mes == 9)||(mes ==11)) & (dia > 30)) |
-        (((mes == 2) & EhAnoBissexto(ano)) && (dia > 29)) | ((mes == 2) & !EhAnoBissexto(ano)) && (dia > 28)) false
+        (((mes == 2) & EhAnoBissexto(ano)) && (dia > 29)) |
+        ((mes == 2) & !EhAnoBissexto(ano)) && (dia > 28)) false
       else true
     }
 
@@ -94,7 +95,7 @@ package ddc {
     def FrodeSimples(dia: Int, mes: Int, ano: Int) : String = { //RECEBE DATA ORIGINAL
       val cartas = List("1","2","3","4","5","6","7","8","9","10","J","Q","K","JO")
       val naipes = List("O","P","C","E")
-      val numerodedia = CorrigeDiaFrode( DiaDoAno(dia,mes,ano) , ano )
+      val numerodedia = CorrigeDiaFrode( DiaDoAno(dia,mes,ano))
 
       val sDia = if(numerodedia < 365) cartas(CartaDiaFrode(numerodedia)) + naipes(NaipeDiaFrode(numerodedia))
       else  cartas(13)
@@ -110,20 +111,20 @@ package ddc {
         "de Valete","de Dama","de Rei","do Curinga")
       val naipes = List(" de ouros"," de paus"," de copas"," de espadas")
 
-      val numerodedia = CorrigeDiaFrode( DiaDoAno(dia,mes,ano) , ano )
+      def CuringaStringLonga(dia: Int) : String =
+        dia match {
+          case 365 => "\tDia " + cartas(13)
+          case 366 => "\tDuplo dia " + cartas(13)
+          case _ => "\tDia de " + cartas(CartaDiaFrode(dia)) + naipes(NaipeDiaFrode(dia))
+        }
+
+
+      val numerodedia = CorrigeDiaFrode( DiaDoAno(dia,mes,ano ))
 
       println("\n\tCalendario de Paciencia de Frode")
       println("\n\t---------------------------------\n")
 
-      if(numerodedia < 365){ //imprime dias
-        println("\tDia de " + cartas(CartaDiaFrode(numerodedia)) + naipes(NaipeDiaFrode(numerodedia)))
-      }
-      else if(numerodedia == 365){ //excecão a regra pelos dias do curinga
-        println("\tDia " + cartas(13))
-      }
-      else if(numerodedia == 366) {
-        println("\tDuplo dia " + cartas(13))
-      }
+      println(CuringaStringLonga(numerodedia));
 
       println("\tSemana de " + cartas(CartaSemanaFrode(numerodedia)) + naipes(NaipeSemanaFrode(numerodedia)))
       println("\tMes de " + cartas(Mes(numerodedia)) + " estacao" + naipes(EstacoesFrode(dia, ano)))
