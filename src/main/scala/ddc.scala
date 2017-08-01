@@ -1,7 +1,7 @@
 package ddc {
   object calendar {
     def EhAnoBissexto(ano: Int) : Boolean = {
-      (!(ano % 4 == 0) & !(ano % 100 == 0)) & (!(ano % 400 == 0))
+      (ano % 400 == 0) || (ano % 4 == 0 && ano % 100 != 0)
     }
 
     def CorrigeDiaFrode(dia: Int, ano: Int) : Int = {
