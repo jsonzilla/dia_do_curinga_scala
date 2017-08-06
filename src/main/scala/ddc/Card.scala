@@ -50,17 +50,15 @@ class Suit(i: Int) {
   }
 }
 
-class Card(cn: CardNumber, s: Suit) {
-  val cardNumber = cn
-  val suit = s
+class Card(cn: Int, s: Int) {
+  val cardNumber = new CardNumber(cn)
+  val suit = new Suit(s)
 
-  private def CardPrint(p: (Option[String], Option[String])): String = {
-    (p._1, p._2) match {
-      case (Some(a), Some(b)) => a + b
-      case (Some(a), None) => "\nError in card suit >>"
-      case (None, Some(a)) => "\nError in card number >>"
-      case _ => "\nError in card >>"
-    }
+  private def CardPrint(p: (Option[String], Option[String])): String = p match {
+    case (Some(a), Some(b)) => a + b
+    case (Some(a), None) => "Error in card suit >> "
+    case (None, Some(a)) => "Error in card number >> "
+    case _ => "Error in card >> "
   }
 
   override def toString: String =

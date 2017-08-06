@@ -1,5 +1,7 @@
 package ddc
 
+import ddc.FrodeCal.FixYear
+
 trait CalendarCard {
   def card(d: Date): Either[String, Card]
 
@@ -19,52 +21,58 @@ trait CalendarCard {
 
 object YearCard extends CalendarCard {
   def card(d: Date) : Either[String, Card]  = {
-    def suit: Int = ((d.year - 1790) / 13) % 4 + 1
-    def cardNumber: Int = (d.year - 1790) % 13 + 1
-    Right(new Card(new CardNumber(cardNumber), new Suit(suit)))
+    val ny = FixYear(d.year)
+    def suit: Int = (ny / 13) % 4 + 1
+    def cardNumber: Int = ny % 13 + 1
+    Right(new Card(cardNumber, suit))
   }
 }
 
 object MonthCard extends CalendarCard {
   def card(d: Date) : Either[String, Card]  = {
-    def suit : Int = {
-      val leap = Date.IsLeapYearInt(d.year - 1)
-      if (d.day <= (62 - leap)) 2
-      else if (d.day <= (154 - leap)) 3
-      else if (d.day <= (247 - leap)) 4
-      else if (d.day <= (338 - leap)) 1
-      else if (d.day <= (367 - leap)) 2
-      2
+    val nd = FrodeCal.ConvertDayCounter(d)
+    nd match {
+      case Left(a) => Left(a)
+      case Right(ndd) =>
+        def suit : Int = {
+          val leap = Date.IsLeapYearInt(d.year - 1)
+          d.day match {
+            case day if day <= (62 - leap) => 2
+            case day if day <= (154 - leap) => 3
+            case day if day <= (247 - leap) => 4
+            case day if day <= (338 - leap) => 1
+            case day if day <= (367 - leap) => 2
+            case _ => 2
+          }
+        }
+        def cardNumber: Int = (ndd / 28) % 13 + 1
+        Right(new Card(cardNumber, suit))
     }
-    def cardNumber: Int = ((d.day - 1) / 28) % 13 + 1
-    Right(new Card(new CardNumber(cardNumber), new Suit(suit)))
   }
 }
 
 object WeekCard extends CalendarCard {
   def card(d: Date) : Either[String, Card] = {
-    val nd = FrodeCalendar.ConvertDayCounter(d)
+    val nd = FrodeCal.ConvertDayCounter(d)
     nd match {
       case Left(a) => Left(a)
-      case Right(ndd) => {
+      case Right(ndd) =>
         def suit: Int = ((ndd / 7)/ 13) % 4 + 1
         def cardNumber: Int = (ndd / 7) % 13 + 1
-        Right(new Card(new CardNumber(cardNumber), new Suit(suit)))
-      }
+        Right(new Card(cardNumber, suit))
     }
   }
 }
 
 object DayCard extends CalendarCard {
   def card(d: Date) :  Either[String, Card] = {
-    val nd = FrodeCalendar.ConvertDayCounter(d)
+    val nd = FrodeCal.ConvertDayCounter(d)
     nd match {
       case Left(a) => Left(a)
-      case Right(ndd) => {
+      case Right(ndd) =>
         def suit: Int = (ndd / 13) % 4 + 1
         def cardNumber: Int = ndd % 13 + 1
-        Right(new Card(new CardNumber(cardNumber), new Suit(suit)))
-      }
+        Right(new Card(cardNumber, suit))
     }
   }
 }

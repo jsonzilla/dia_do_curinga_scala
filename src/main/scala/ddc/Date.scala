@@ -7,11 +7,13 @@ class Date(y: Int, m: Int, d: Int) {
   val month: Int = m
   val day: Int = d
 
-  private def feb: Boolean = {
+  private def feb: Boolean =
     if (IsLeapYear(year)) day <= 29 else d <= 28
-  }
 
-  def IsValid: Boolean = month match {
+  def IsValid: Boolean =
+    day > 0 && day < 32 && IsValidByMonth
+
+  def IsValidByMonth: Boolean = month match {
     case 1 | 3 | 5 | 7 | 8 | 10 | 12 => day <= 31
     case 4 | 6 | 9 | 11 => day <= 30
     case 2 => feb
