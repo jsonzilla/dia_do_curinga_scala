@@ -9,10 +9,10 @@ object Main extends App {
   val lines: Array[String] = input.split(" ")
 
   if (lines.length.==(3)) {
-    ImprimeCalendarioFrode(augmentString(lines.apply(0)).toInt, augmentString(lines.apply(1)).toInt, augmentString(lines.apply(2)).toInt);
-    println("\n\tSimples -- ".+(FrodeSimples(augmentString(lines.apply(0)).toInt, augmentString(lines.apply(1)).toInt, augmentString(lines.apply(2)).toInt)));
+    ImprimeCalendarioFrode(augmentString(lines.apply(0)).toInt, augmentString(lines.apply(1)).toInt, augmentString(lines.apply(2)).toInt)
+    println("\n\tSimples -- ".+(FrodeSimples(augmentString(lines.apply(0)).toInt, augmentString(lines.apply(1)).toInt, augmentString(lines.apply(2)).toInt)))
   }
   else {
-    println("\nDigitou errado");
+    println("\nDigitou errado")
   }
 }
