@@ -10,7 +10,7 @@ object FrodeCal {
     ", mes " + MonthCard.showComplete(d) +
     ", ano " + YearCard.showComplete(d)
 
-  private def FrodeDayFix(d: Int) : Int = {
+  def FrodeDayFix(d: Int) : Int = {
     if (d > 60) d - 60 else d + 305
   }
 
@@ -28,7 +28,7 @@ object FrodeCal {
   def FixYear(y: Int): Int =
     if (y < 1790) 1790 - y else y - 1790
 
-  private def CountNumberOfDays(d: Date): Either[String, Int] = {
+  def CountNumberOfDays(d: Date): Either[String, Int] = {
     if (!d.IsValid)
       Left("Error invalid date >> ")
     else {

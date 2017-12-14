@@ -10,7 +10,7 @@ class Date(y: Int, m: Int, d: Int) {
   private def feb: Boolean =
     if (IsLeapYear(year)) day <= 29 else d <= 28
 
-  def IsValid: Boolean =
+  def IsValidDay: Boolean =
     day > 0 && day < 32 && IsValidByMonth
 
   def IsValidByMonth: Boolean = month match {
@@ -19,6 +19,12 @@ class Date(y: Int, m: Int, d: Int) {
     case 2 => feb
     case _ => false
   }
+
+  def IsValidYear: Boolean = 
+    year != 0
+
+  def IsValid: Boolean = 
+   IsValidDay && IsValidByMonth && IsValidYear
 }
 
 object Date {
