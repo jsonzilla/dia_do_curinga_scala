@@ -8,7 +8,7 @@ class Date(y: Int, m: Int = 1, d: Int= 1) {
   val day: Int = d
 
   private def feb: Boolean =
-    if (IsLeapYear(year)) day <= 29 else day <= 28
+    day <= (28 + IsLeapYearInt(year)) 
 
   def IsValidDay: Boolean =
     day > 0 && day < 32 && IsValidByMonth
