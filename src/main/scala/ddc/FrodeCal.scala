@@ -10,8 +10,10 @@ object FrodeCal {
     ", mes " + MonthCard.showComplete(d) +
     ", ano " + YearCard.showComplete(d)
 
-  def FrodeDayFix(d: Int) : Int = {
-    if (d > 60) d - 60 else d + 305
+  def FrodeDayFix(d: Date, n: Int) : Int = {
+    val leap = Date.IsLeapYearInt(d.year)
+    if (n > 60 - leap) n - 60
+    else n + 305
   }
 
   def ConvertDayCounter(d: Date) : Either[String, Int] = {
@@ -19,8 +21,7 @@ object FrodeCal {
     day match {
       case Left(a) => Left("Error in convert day counter >> " + a)
       case Right(a) => {
-        if (Date.IsLeapYear(d.year)) Right(FrodeDayFix(a + 1))
-        Right(FrodeDayFix(a))
+        Right(FrodeDayFix(d, a))
       }
     }
   }

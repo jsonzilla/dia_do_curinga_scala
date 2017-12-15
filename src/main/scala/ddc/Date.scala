@@ -2,13 +2,13 @@ package ddc
 
 import ddc.Date.{IsLeapYear}
 
-class Date(y: Int, m: Int, d: Int) {
+class Date(y: Int, m: Int = 1, d: Int= 1) {
   val year: Int = y
   val month: Int = m
   val day: Int = d
 
   private def feb: Boolean =
-    if (IsLeapYear(year)) day <= 29 else d <= 28
+    if (IsLeapYear(year)) day <= 29 else day <= 28
 
   def IsValidDay: Boolean =
     day > 0 && day < 32 && IsValidByMonth
@@ -29,7 +29,7 @@ class Date(y: Int, m: Int, d: Int) {
 
 object Date {
   def IsLeapYear(year: Int) : Boolean = {
-    (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)
+     (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)
   }
 
   def IsLeapYearInt(year: Int) : Int = {

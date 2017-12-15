@@ -3,32 +3,31 @@ package test.ddc
 import ddc.Date
 
 import org.scalatest.FunSuite
-import org.scalatest.BeforeAndAfter
 
-class DateFixedTests extends FunSuite with BeforeAndAfter {
- var date: Date = _
-
-  before {
-    date = new Date(2018,12,21)
-  }
+class DateFixedTests extends FunSuite {
 
   test("year is 2018") {
+    val date = new Date(2018,12,21)
     assert(date.year == 2018)
   }
 
   test("month is 12") {
+    val date = new Date(2018,12,21)
     assert(date.month == 12)
   }
 
   test("day is 12") {
+    val date = new Date(2018,12,21)
     assert(date.day == 21)
   }
 
   test("IsValid") {
+    val date = new Date(2018,12,21)
     assert(date.IsValid == true)
   }
 
   test("IsValidByMonth") {
+    val date = new Date(2018,12,21)
     assert(date.IsValidByMonth == true)
   }
 
@@ -40,7 +39,11 @@ class DateFixedTests extends FunSuite with BeforeAndAfter {
     assert(Date.IsLeapYear(2011) == false)
   }
 
-    test("Is leap year int") {
+  test("Is not leap year int 2013") {
+    assert(Date.IsLeapYearInt(2013) == 0)
+  }
+
+  test("Is leap year int") {
     assert(Date.IsLeapYearInt(2012) == 1)
   }
 
