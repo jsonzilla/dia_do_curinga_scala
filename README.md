@@ -12,3 +12,13 @@ Taking into account the southern hemisphere! The seasons of the year are marked 
 * Summer and is golds
 * Spring is cup 
 * Winter is swords
+
+## Build
+```
+sbt compile
+```
+
+## Test
+```
+sbt test
+```

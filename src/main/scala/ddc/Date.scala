@@ -7,8 +7,8 @@ class Date(y: Int, m: Int = 1, d: Int= 1) {
   val month: Int = m
   val day: Int = d
 
-  private def feb: Boolean =
-    day <= (28 + IsLeapYearInt(year)) 
+  private def feb: Boolean = 
+    day <= (28 + Date.IsLeapYearInt(year)) 
 
   def IsValidDay: Boolean =
     day > 0 && day < 32 && IsValidByMonth
