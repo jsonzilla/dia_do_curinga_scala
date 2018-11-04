@@ -65,7 +65,7 @@ class FrodeCalTests extends FunSuite {
     assert(FrodeCal.FrodeDayFix(date, 62) == 2)
   }
 
-  test("Date 2017.7.18 should be compact frode 9C8P6P7P") {
+  test("Date 2017.7.18 should be compact frode 9C7P5P7P") {
     val date = new Date(2017,7,18)
     assert(FrodeCal.Compact(date) == "9C7P5P7P")
   }
