@@ -2,14 +2,14 @@ package test.ddc
 
 import ddc.{Date,FrodeCal}
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
-class FrodeCalTests extends FunSuite {
+class FrodeCalTests extends AnyFunSuite {
   test("In date 2017.17.31 should be raise a error") {
     val date = new Date(2017,17,31)
     assert(FrodeCal.CountNumberOfDays(date) == Left("Error invalid date >> "))
   }
-  
+
   test("In date 2017.7.19 should be count 200 days") {
     val date = new Date(2017,7,19)
     assert(FrodeCal.CountNumberOfDays(date) == Right(200))
@@ -44,12 +44,12 @@ class FrodeCalTests extends FunSuite {
     val date = new Date(2012)
     assert(FrodeCal.FrodeDayFix(date, 365) == 305)
   }
-  
+
   test("Gregorian day 59 should be Frode 364 day") {
     val date = new Date(2012)
     assert(FrodeCal.FrodeDayFix(date, 59) == 364)
   }
-  
+
   test("Gregorian day 60 should be Frode 0 (joker) day") {
     val date = new Date(2012)
     assert(FrodeCal.FrodeDayFix(date, 60) == 0)

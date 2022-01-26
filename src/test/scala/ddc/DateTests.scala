@@ -2,9 +2,9 @@ package test.ddc
 
 import ddc.Date
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
-class DateFixedTests extends FunSuite {
+class DateTests extends AnyFunSuite {
 
   test("year is 2018") {
     val date = new Date(2018,12,21)
@@ -52,7 +52,7 @@ class DateFixedTests extends FunSuite {
   }
 }
 
-class DateTestsValid extends FunSuite {
+class DateTestsValid extends AnyFunSuite {
   test("valid") {
     val date = new Date(1999,10,1)
     assert(date.IsValid == true)
@@ -62,7 +62,7 @@ class DateTestsValid extends FunSuite {
     val date = new Date(1999,10,0)
     assert(date.IsValid == false)
   }
-  
+
   test("day 32") {
     val date = new Date(1999,10,32)
     assert(date.IsValid == false)
